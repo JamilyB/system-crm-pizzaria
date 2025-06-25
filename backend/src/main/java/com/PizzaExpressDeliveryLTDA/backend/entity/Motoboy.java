@@ -23,10 +23,6 @@ public class Motoboy {
 
     private String placaVeiculo;
 
-    private String modeloVeiculo;
-
-    private String corVeiculo;
-
     private String email;
 
     private String senha;
@@ -65,20 +61,6 @@ public class Motoboy {
     }
     public void setPlacaVeiculo(String placaVeiculo) {
         this.placaVeiculo = placaVeiculo;
-    }
-
-    public String getModeloVeiculo() {
-        return modeloVeiculo;
-    }
-    public void setModeloVeiculo(String modeloVeiculo) {
-        this.modeloVeiculo = modeloVeiculo;
-    }
-
-    public String getCorVeiculo() {
-        return corVeiculo;
-    }
-    public void setCorVeiculo(String corVeiculo) {
-        this.corVeiculo = corVeiculo;
     }
 
     public String getEmail() {

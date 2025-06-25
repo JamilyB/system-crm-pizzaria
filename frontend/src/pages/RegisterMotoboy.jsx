@@ -1,9 +1,10 @@
 import React, { useState }  from 'react';
 import AuthTemplate from '../components/templates/AuthTemplate';
 import FormAuth from '../components/organisms/FormAuth';
-
+import { useNavigate } from 'react-router-dom';
 const RegisterMotoboy = () => {
 
+const navigate = useNavigate();
 // 1. Cria o estado do formulário, com os campos que precisa
   const [formData, setFormData] = useState({ nome:'', email: '', placaVeiculo: '', senha:''});
 
@@ -33,7 +34,7 @@ const RegisterMotoboy = () => {
             const data = await response.json();
             console.log('Cadastro bem-sucedido:', data);
             setErrors({});
-            // Aqui você pode redirecionar o usuário ou mostrar mensagem de sucesso
+            navigate('/login-motoboy');
           }
         } catch (error) {
             alert('Erro: ' + error);

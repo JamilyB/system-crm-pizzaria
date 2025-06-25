@@ -14,7 +14,6 @@ const Button = ({ children, onClick, type = 'submit' }) => {
         fontSize: '1.25rem',
         whiteSpace: 'normal',
         textAlign: 'center',
-        width: '120px',
       }}
       onMouseOver={e => (e.currentTarget.style.backgroundColor = '#260101')}
       onMouseOut={e => (e.currentTarget.style.backgroundColor = '#260101')}

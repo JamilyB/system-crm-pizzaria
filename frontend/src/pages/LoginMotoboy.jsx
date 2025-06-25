@@ -33,7 +33,7 @@ const handleSubmit = async (e) => {
 
         localStorage.setItem('userId', data.userId);  // ou outro dado que o backend retorne
 
-        window.location.href = '/principal-motoboy';
+        window.location.href = '/historico-motoboy';
       }
     } catch (error) {
       setErrors({ general: 'Erro de conexão com o servidor' });

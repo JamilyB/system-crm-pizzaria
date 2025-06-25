@@ -66,8 +66,6 @@ public class MotoboyController {
             motoboy.setCpf(motoboyAtualizado.getCpf());
             motoboy.setCnh(motoboyAtualizado.getCnh());
             motoboy.setPlacaVeiculo(motoboyAtualizado.getPlacaVeiculo());
-            motoboy.setModeloVeiculo(motoboyAtualizado.getModeloVeiculo());
-            motoboy.setCorVeiculo(motoboyAtualizado.getCorVeiculo());
             motoboy.setEmail(motoboyAtualizado.getEmail());
             motoboy.setSenha(motoboyAtualizado.getSenha());
             return motoboyRepository.save(motoboy);

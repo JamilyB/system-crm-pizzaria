@@ -20,8 +20,9 @@ public class Avaliacao {
 
     private String tipoAvaliado;
 
-    // Pode ser Entidades diferentes
     private Long idAvaliado;
+
+    private Long idAvaliador;
 
 // Getters e Setters
 
@@ -71,6 +72,14 @@ public class Avaliacao {
 
     public void setIdAvaliado(Long idAvaliado) {
         this.idAvaliado = idAvaliado;
+    }
+
+    public Long getIdAvaliador() {
+        return idAvaliador;
+    }
+
+    public void setIdAvaliador(Long idAvaliador) {
+        this.idAvaliador = idAvaliador;
     }
 
 }

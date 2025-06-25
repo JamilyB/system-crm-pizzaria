@@ -1,6 +1,7 @@
 import React from 'react';
 import FormField from '../molecules/FormField';
 import Button from '../atoms/Button';
+import logoV from '../assets/logoV.png';
 
 const FormAuth = ({ type, formData, onChange, onSubmit, errors }) => {
   const titles = {
@@ -54,6 +55,12 @@ const FormAuth = ({ type, formData, onChange, onSubmit, errors }) => {
   return (
     <form onSubmit={onSubmit} className="container p-4 bg-light rounded shadow-sm">
       <div className="text-center mb-4">
+        <img
+          src={logoV}
+          alt="Logo"
+          style={{ width: '120px', height: 'auto', marginBottom: '16px' }}
+          className="d-block mx-auto"
+        />
         <h2>{titles[type] || ''}</h2>
       </div>
       {renderFields()}

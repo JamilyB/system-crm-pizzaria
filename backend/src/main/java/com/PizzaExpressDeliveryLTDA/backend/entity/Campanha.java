@@ -17,49 +17,47 @@ public class Campanha {
 
     private double taxaRetorno;
 
+    private String descricao;
+
+    private String beneficio;
+
     @ElementCollection
     private List<String> clientesAtingidos;
 
+    @ElementCollection
+    private List<String> clientesCativados;
+
     // Getters e Setters
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getMidiaUsada() { return midiaUsada; }
+    public void setMidiaUsada(String midiaUsada) { this.midiaUsada = midiaUsada; }
 
-    public String getMidiaUsada() {
-        return midiaUsada;
-    }
+    public LocalDate getDataCampanha() { return dataCampanha; }
+    public void setDataCampanha(LocalDate dataCampanha) { this.dataCampanha = dataCampanha; }
 
-    public void setMidiaUsada(String midiaUsada) {
-        this.midiaUsada = midiaUsada;
-    }
+    public double getTaxaRetorno() { return taxaRetorno; }
+    public void setTaxaRetorno(double taxaRetorno) { this.taxaRetorno = taxaRetorno; }
 
-    public LocalDate getDataCampanha() {
-        return dataCampanha;
-    }
+    public String getDescricao() { return descricao; }
+    public void setDescricao(String descricao) { this.descricao = descricao; }
 
-    public void setDataCampanha(LocalDate dataCampanha) {
-        this.dataCampanha = dataCampanha;
-    }
+    public String getBeneficio() { return beneficio; }
+    public void setBeneficio(String beneficio) { this.beneficio = beneficio; }
 
-    public double getTaxaRetorno() {
-        return taxaRetorno;
-    }
+    public List<String> getClientesAtingidos() { return clientesAtingidos; }
+    public void setClientesAtingidos(List<String> clientesAtingidos) { this.clientesAtingidos = clientesAtingidos; }
 
-    public void setTaxaRetorno(double taxaRetorno) {
-        this.taxaRetorno = taxaRetorno;
-    }
+    public List<String> getClientesCativados() { return clientesCativados; }
+    public void setClientesCativados(List<String> clientesCativados) { this.clientesCativados = clientesCativados; }
 
-    public List<String> getClientesAtingidos() {
-        return clientesAtingidos;
-    }
-
-    public void setClientesAtingidos(List<String> clientesAtingidos) {
-        this.clientesAtingidos = clientesAtingidos;
+    public void calcularTaxaRetorno() {
+        if (clientesAtingidos != null && !clientesAtingidos.isEmpty() && clientesCativados != null) {
+            this.taxaRetorno = (double) clientesCativados.size() / clientesAtingidos.size();
+        } else {
+            this.taxaRetorno = 0.0;
+        }
     }
 }
-

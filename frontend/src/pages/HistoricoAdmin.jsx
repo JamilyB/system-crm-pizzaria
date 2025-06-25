@@ -1,4 +1,3 @@
-// src/pages/HistoricoAdmin.jsx
 import React from 'react';
 import CardHistorico from '../components/molecules/CardHistorico';
 
@@ -9,11 +8,30 @@ const dadosPedidos = [
 ];
 
 const HistoricoAdmin = () => {
+  // Função para enviar avaliação ao backend
+  const handleAvaliar = async (pedido, avaliacao) => {
+    try {
+      await fetch('http://localhost:8080/api/avaliacoes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(avaliacao),
+      });
+      alert('Avaliação enviada!');
+    } catch (e) {
+      alert('Erro ao enviar avaliação');
+    }
+  };
+
   return (
     <div className="container mt-4">
-      <h2 style={{ color: '#FF0055' }}>Histórico de Pedidos</h2>
+      <h2 style={{ color: '#260101' }}>Histórico de Pedidos</h2>
       {dadosPedidos.map((pedido) => (
-        <CardHistorico pedido={pedido} avaliador="pizzaria" />
+        <CardHistorico
+          key={pedido.id}
+          pedido={pedido}
+          avaliador="pizzaria"
+          onAvaliar={handleAvaliar}
+        />
       ))}
     </div>
   );

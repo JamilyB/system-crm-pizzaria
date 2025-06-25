@@ -1,3 +1,4 @@
+// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ import RegisterCliente from './pages/RegisterCliente';
 import RegisterMotoboy from './pages/RegisterMotoboy';
 import Sobre from './pages/Sobre';
 import Fidelidade from './pages/Fidelidade';
+import CampanhasCliente from './pages/CampanhasCliente';
 import Principal from './pages/Principal';
 import PrincipalMotoboy from './pages/PrincipalMotoboy';
 import HistoricoCliente from './pages/HistoricoCliente';
@@ -23,17 +25,64 @@ import NavigationCRM from './components/molecules/NavigationCRM';
 import NavigationUser from './components/molecules/NavigationUser';
 import Header from './components/molecules/Header';
 
+function getUserType(pathname) {
+  if (
+    pathname.startsWith('/principal-motoboy') ||
+    pathname.startsWith('/historico-motoboy')
+  ) {
+    return 'motoboy';
+  }
+  if (
+    pathname.startsWith('/principal') ||
+    pathname.startsWith('/fidelidade') ||
+    pathname.startsWith('/historico-cliente') ||
+    pathname.startsWith('/campanhas-cliente')
+  ) {
+    return 'cliente';
+  }
+  return null;
+}
+
 function AppContent() {
   const location = useLocation();
   const isCRM = location.pathname.startsWith('/crm');
-  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+  const noHeaderRoutes = [
+    '/login-cliente',
+    '/login-motoboy',
+    '/register-cliente',
+    '/register-motoboy'
+  ];
+  const hideHeader = noHeaderRoutes.includes(location.pathname);
+  const hideNavigationUser = noHeaderRoutes.includes(location.pathname);
+
+  const userType = getUserType(location.pathname);
+
+  if (isCRM) {
+    return (
+      <>
+        {!hideHeader && <Header />}
+        <div style={{ display: 'flex', minHeight: '100vh' }}>
+          <NavigationCRM />
+          <main className="flex-grow-1">
+            <Routes>
+              <Route path="/crm" element={<HomeAdmin />} />
+              <Route path="/crm/avaliacoes" element={<Avaliacoes />} />
+              <Route path="/crm/perfil" element={<Perfil />} />
+              <Route path="/crm/historico" element={<HistoricoAdmin />} />
+              <Route path="/crm/campanhas" element={<Campanhas />} />
+              <Route path="/crm/dashboard" element={<Dashboard />} />
+            </Routes>
+          </main>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
-      <Header />
-      {isLoggedIn && <NavigationUser />}
-      {isCRM && <NavigationCRM />}
-
+      {!hideHeader && <Header />}
+      {!hideNavigationUser && userType && <NavigationUser userType={userType} />}
       <main className="flex-grow-1">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -47,12 +96,7 @@ function AppContent() {
           <Route path="/principal-motoboy" element={<PrincipalMotoboy />} />
           <Route path="/historico-cliente" element={<HistoricoCliente />} />
           <Route path="/historico-motoboy" element={<HistoricoMotoboy />} />
-          <Route path="/crm" element={<HomeAdmin />} />
-          <Route path="/crm/avaliacoes" element={<Avaliacoes />} />
-          <Route path="/crm/perfil" element={<Perfil />} />
-          <Route path="/crm/historico" element={<HistoricoAdmin />} />
-          <Route path="/crm/campanhas" element={<Campanhas />} />
-          <Route path="/crm/dashboard" element={<Dashboard />} />
+          <Route path="/campanhas-cliente" element={<CampanhasCliente />} />
         </Routes>
       </main>
     </>

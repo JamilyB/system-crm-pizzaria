@@ -1,14 +1,10 @@
 import React from 'react';
-import logo from '../assets/logoB.png';
 
 const AuthTemplate = ({ children }) => {
   return (
-    <div className="d-flex vh-100" style={{ backgroundColor: '#260101' }}>
-      <div className="w-50 d-flex align-items-center justify-content-center p-5" >
+    <div className="d-flex vh-100 align-items-center justify-content-center" style={{ backgroundColor: '#260101' }}>
+      <div className="w-100" style={{ maxWidth: 420 }}>
         {children}
-      </div>
-      <div className="w-50 d-flex align-items-center justify-content-center" >
-        <img src={logo} alt="Logo" style={{ maxWidth: '70%', height: 'auto' }} />
       </div>
     </div>
   );

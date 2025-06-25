@@ -1,4 +1,3 @@
-
 import React from 'react';
 import AvaliacoesTemplate from '../components/templates/AvaliacoesTemplate';
 
