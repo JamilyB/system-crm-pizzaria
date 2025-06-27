@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://pizzaexpresscrm.onrender.com"})
 @RestController
 @RequestMapping("/api/campanhas")
 public class CampanhaController {

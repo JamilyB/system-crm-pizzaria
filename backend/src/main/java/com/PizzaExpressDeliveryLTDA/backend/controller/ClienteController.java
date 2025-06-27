@@ -11,8 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000", "https://pizzaexpresscrm.onrender.com"})
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
