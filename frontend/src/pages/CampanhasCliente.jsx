@@ -9,14 +9,14 @@ const CampanhasCliente = () => {
     const aceitasSalvas = JSON.parse(localStorage.getItem('campanhasAceitas') || '{}');
     setAceitas(aceitasSalvas);
 
-    fetch('http://localhost:8080/api/campanhas')
+    fetch('https://system-crm-pizzaria.onrender.com/api/campanhas')
       .then(res => res.json())
       .then(data => {
         setCampanhas(data);
         const userId = localStorage.getItem('userId');
         if (userId && userId.trim() !== '') {
           data.forEach(campanha => {
-            fetch(`http://localhost:8080/api/campanhas/${campanha.id}/atingir`, {
+            fetch(`https://system-crm-pizzaria.onrender.com/api/campanhas/${campanha.id}/atingir`, {
               method: 'POST',
               headers: { 'Content-Type': 'text/plain' },
               body: userId.trim()
@@ -29,7 +29,7 @@ const CampanhasCliente = () => {
   const handleCativar = (campanhaId) => {
     const userId = localStorage.getItem('userId');
     if (userId && userId.trim() !== '') {
-      fetch(`http://localhost:8080/api/campanhas/${campanhaId}/cativar`, {
+      fetch(`https://system-crm-pizzaria.onrender.com/api/campanhas/${campanhaId}/cativar`, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: userId.trim()

@@ -22,7 +22,7 @@ const RegisterCliente = () => {
 
       try {
           console.log('Enviando formData:', formData);
-        const response = await fetch('http://localhost:8080/clientes/register', {
+        const response = await fetch('https://system-crm-pizzaria.onrender.com/clientes/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),

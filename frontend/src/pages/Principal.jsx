@@ -7,7 +7,7 @@ const Principal = () => {
     const userId = localStorage.getItem('userId');
 
     if (userId) {
-      fetch(`http://localhost:8080/clientes/${userId}`)
+      fetch(`https://system-crm-pizzaria.onrender.com/clientes/${userId}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Erro na requisição');

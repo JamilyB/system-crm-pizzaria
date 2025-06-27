@@ -21,7 +21,7 @@ const navigate = useNavigate();
 
         try {
             console.log('Enviando formData:', formData);
-          const response = await fetch('http://localhost:8080/motoboys/register', {
+          const response = await fetch('https://system-crm-pizzaria.onrender.com/motoboys/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData),

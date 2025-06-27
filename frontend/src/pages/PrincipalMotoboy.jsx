@@ -7,7 +7,7 @@ const PrincipalMotoboy = () => {
     const userId = localStorage.getItem('userId');
 
     if (userId) {
-      fetch(`http://localhost:8080/motoboys/${userId}`)
+      fetch(`https://system-crm-pizzaria.onrender.com/motoboys/${userId}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Erro na requisição');

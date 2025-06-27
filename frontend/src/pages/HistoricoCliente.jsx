@@ -10,7 +10,7 @@ const HistoricoCliente = () => {
 
   const handleAvaliar = async (pedido, avaliacao) => {
     try {
-      await fetch('http://localhost:8080/api/avaliacoes', {
+      await fetch('https://system-crm-pizzaria.onrender.com/api/avaliacoes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(avaliacao),

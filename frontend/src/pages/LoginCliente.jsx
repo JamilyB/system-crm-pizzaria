@@ -14,7 +14,7 @@ const LoginCliente = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/clientes/login', {
+      const response = await fetch('https://system-crm-pizzaria.onrender.com/clientes/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

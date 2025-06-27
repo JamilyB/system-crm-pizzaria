@@ -5,7 +5,7 @@ const CampanhasAdmin = () => {
   const [novaCampanha, setNovaCampanha] = useState({ nome: '', midia: '', beneficio: '' });
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/campanhas')
+    fetch('https://system-crm-pizzaria.onrender.com/api/campanhas')
       .then(res => res.json())
       .then(data => setCampanhas(
         data.map(c => ({
@@ -26,7 +26,7 @@ const CampanhasAdmin = () => {
       midiaUsada: novaCampanha.midia,
       beneficio: novaCampanha.beneficio
     };
-    const resp = await fetch('http://localhost:8080/api/campanhas', {
+    const resp = await fetch('https://system-crm-pizzaria.onrender.com/api/campanhas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -49,7 +49,7 @@ const CampanhasAdmin = () => {
   };
 
   const handleDelete = async (id) => {
-    const resp = await fetch(`http://localhost:8080/api/campanhas/${id}`, {
+    const resp = await fetch(`https://system-crm-pizzaria.onrender.com/api/campanhas/${id}`, {
       method: 'DELETE'
     });
     if (resp.ok) {
