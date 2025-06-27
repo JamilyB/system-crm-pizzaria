@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import HeaderCliente from './components/molecules/Header';
 import HeaderCRM from './components/molecules/HeaderCRM';
 import Footer from './components/molecules/Footer';
-
+import { HashRouter } from 'react-router-dom';
 const path = window.location.pathname;
 
 // Define qual header mostrar
@@ -15,7 +15,9 @@ const Header = path.startsWith('/crm') ? HeaderCRM : HeaderCliente;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+       <App />
+    </HashRouter>
   </React.StrictMode>
 );
 
