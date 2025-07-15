@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import CardHistorico from '../components/molecules/CardHistorico';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 const HistoricoMotoboy = () => {
   const [pedidos] = useState([
     { id: 101, cliente: 'João Silva', motoboy: 'Carlos', pizzaria: 'Pizza Express', dataHora: '05/06/2025 19:30' },
@@ -11,7 +13,7 @@ const HistoricoMotoboy = () => {
   // Função para enviar avaliação ao backend
   const handleAvaliar = async (pedido, avaliacao) => {
     try {
-      await fetch('https://system-crm-pizzaria.onrender.com/api/avaliacoes', {
+      await fetch(`${API_URL}/api/avaliacoes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(avaliacao),

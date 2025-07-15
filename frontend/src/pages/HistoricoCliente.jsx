@@ -1,6 +1,7 @@
-// Exemplo para src/pages/HistoricoCliente.jsx
 import React, { useState } from 'react';
 import CardHistorico from '../components/molecules/CardHistorico';
+
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const HistoricoCliente = () => {
   const [pedidos] = useState([
@@ -10,7 +11,7 @@ const HistoricoCliente = () => {
 
   const handleAvaliar = async (pedido, avaliacao) => {
     try {
-      await fetch('https://system-crm-pizzaria.onrender.com/api/avaliacoes', {
+      await fetch(`${API_URL}/api/avaliacoes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(avaliacao),

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 const CampanhasAdmin = () => {
   const [campanhas, setCampanhas] = useState([]);
   const [novaCampanha, setNovaCampanha] = useState({ nome: '', midia: '', beneficio: '' });
 
   useEffect(() => {
-    fetch('https://system-crm-pizzaria.onrender.com/api/campanhas')
+    fetch(`${API_URL}/api/campanhas`)
       .then(res => res.json())
       .then(data => setCampanhas(
         data.map(c => ({
@@ -26,7 +28,7 @@ const CampanhasAdmin = () => {
       midiaUsada: novaCampanha.midia,
       beneficio: novaCampanha.beneficio
     };
-    const resp = await fetch('https://system-crm-pizzaria.onrender.com/api/campanhas', {
+    const resp = await fetch(`${API_URL}/api/campanhas`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -49,7 +51,7 @@ const CampanhasAdmin = () => {
   };
 
   const handleDelete = async (id) => {
-    const resp = await fetch(`https://system-crm-pizzaria.onrender.com/api/campanhas/${id}`, {
+    const resp = await fetch(`${API_URL}/api/campanhas/${id}`, {
       method: 'DELETE'
     });
     if (resp.ok) {

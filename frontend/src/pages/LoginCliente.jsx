@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import AuthTemplate from '../components/templates/AuthTemplate';
 import FormAuth from '../components/organisms/FormAuth';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 const LoginCliente = ({ onLogin }) => {
   const [formData, setFormData] = useState({ email: '', senha: '' });
   const [errors, setErrors] = useState({});
@@ -14,7 +16,7 @@ const LoginCliente = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://system-crm-pizzaria.onrender.com/clientes/login', {
+      const response = await fetch(`${API_URL}/clientes/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),

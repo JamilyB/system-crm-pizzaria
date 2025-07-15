@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+const API_URL = process.env.REACT_APP_API_URL;
 const PrincipalMotoboy = () => {
   const [nome, setNome] = useState('');
 

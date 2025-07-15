@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 const Principal = () => {
   const [nome, setNome] = useState('');
 
@@ -7,7 +9,7 @@ const Principal = () => {
     const userId = localStorage.getItem('userId');
 
     if (userId) {
-      fetch(`https://system-crm-pizzaria.onrender.com/clientes/${userId}`)
+      fetch(`${API_URL}/clientes/${userId}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Erro na requisição');

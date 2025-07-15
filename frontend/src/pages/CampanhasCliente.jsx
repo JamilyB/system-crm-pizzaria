@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 const CampanhasCliente = () => {
   const [campanhas, setCampanhas] = useState([]);
   const [aceitas, setAceitas] = useState({});
@@ -9,14 +11,14 @@ const CampanhasCliente = () => {
     const aceitasSalvas = JSON.parse(localStorage.getItem('campanhasAceitas') || '{}');
     setAceitas(aceitasSalvas);
 
-    fetch('https://system-crm-pizzaria.onrender.com/api/campanhas')
+    fetch(`${API_URL}/api/campanhas`)
       .then(res => res.json())
       .then(data => {
         setCampanhas(data);
         const userId = localStorage.getItem('userId');
         if (userId && userId.trim() !== '') {
           data.forEach(campanha => {
-            fetch(`https://system-crm-pizzaria.onrender.com/api/campanhas/${campanha.id}/atingir`, {
+            fetch(`${API_URL}/api/campanhas/${campanha.id}/atingir`, {
               method: 'POST',
               headers: { 'Content-Type': 'text/plain' },
               body: userId.trim()
@@ -29,7 +31,7 @@ const CampanhasCliente = () => {
   const handleCativar = (campanhaId) => {
     const userId = localStorage.getItem('userId');
     if (userId && userId.trim() !== '') {
-      fetch(`https://system-crm-pizzaria.onrender.com/api/campanhas/${campanhaId}/cativar`, {
+      fetch(`${API_URL}/api/campanhas/${campanhaId}/cativar`, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
         body: userId.trim()
