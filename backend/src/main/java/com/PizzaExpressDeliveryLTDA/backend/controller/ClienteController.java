@@ -3,6 +3,7 @@ package com.PizzaExpressDeliveryLTDA.backend.controller;
 
 import com.PizzaExpressDeliveryLTDA.backend.entity.Cliente;
 import com.PizzaExpressDeliveryLTDA.backend.repository.ClienteRepository;
+import com.PizzaExpressDeliveryLTDA.backend.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,61 +18,36 @@ import java.util.Optional;
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
     @GetMapping
     public List<Cliente> listarClientes() {
-        return clienteRepository.findAll();
+        return clienteService.listarTodos();
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Cliente cliente) {
-        Optional<Cliente> optionalCliente = clienteRepository.findByEmail(cliente.getEmail());
-
-        if (optionalCliente.isEmpty() ||
-                !optionalCliente.get().getSenha().equals(cliente.getSenha())) {
-            return ResponseEntity.status(401).body(Map.of("message", "Credenciais inválidas"));
-        }
-
-        Cliente clienteLogado = optionalCliente.get();
-        Map<String, Object> response = new HashMap<>();
-        response.put("userId", clienteLogado.getId());
-        response.put("message", "Login realizado com sucesso! Bem-vindo, " + clienteLogado.getNome());
-        return ResponseEntity.ok(response);
+        return clienteService.realizarLogin(cliente);
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Cliente cliente) {
-        if (clienteRepository.findByEmail(cliente.getEmail()).isPresent()) {
-            return ResponseEntity.status(409).body(Map.of("message", "Email já cadastrado"));
-        }
-        Cliente novoCliente = clienteRepository.save(cliente);
-        Map<String, Object> response = new HashMap<>();
-        response.put("userId", novoCliente.getId());
-        response.put("message", "Cadastro realizado com sucesso! Bem-vindo, " + novoCliente.getNome());
-        return ResponseEntity.status(201).body(response);
+        return clienteService.cadastrarCliente(cliente);
     }
 
     @GetMapping("/{id}")
     public Cliente buscarCliente(@PathVariable Long id) {
-        return clienteRepository.findById(id).orElse(null);
+        return clienteService.buscarPorId(id);
     }
 
     @PutMapping("/{id}")
     public Cliente atualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteAtualizado) {
-        return clienteRepository.findById(id).map(cliente -> {
-            cliente.setNome(clienteAtualizado.getNome());
-            cliente.setTelefone(clienteAtualizado.getTelefone());
-            cliente.setEmail(clienteAtualizado.getEmail());
-            cliente.setEndereco(clienteAtualizado.getEndereco());
-            cliente.setCpf(clienteAtualizado.getCpf());
-            cliente.setSenha(clienteAtualizado.getSenha());
-            return clienteRepository.save(cliente);
-        }).orElse(null);
+        return clienteService.atualizar(id, clienteAtualizado);
     }
 
     @DeleteMapping("/{id}")
     public void deletarCliente(@PathVariable Long id) {
-        clienteRepository.deleteById(id);
+        clienteService.deletar(id);
     }
 }
+
