@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import cor from '../../styles/colors';
 
 const navItems = {
   cliente: [

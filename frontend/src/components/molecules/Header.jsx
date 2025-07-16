@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from '../assets/logoB.png';
+import cor from '../../styles/colors';
 
 const Header = ({ isLoggedIn }) => {
   return (
-    <header className="d-flex align-items-center p-3" style={{ backgroundColor: '#260101' }}>
+    <header className="d-flex align-items-center p-3" style={{ backgroundColor: cor.p1 }}>
       <img src={logo} alt="Logo" width="60" height="60" className="me-3" />
       <h1 className="fw-bold fs-4 text-white">Pizza Express</h1>
 

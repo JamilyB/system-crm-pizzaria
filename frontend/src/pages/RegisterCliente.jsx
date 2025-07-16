@@ -10,7 +10,6 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 const RegisterCliente = () => {
   const navigate = useNavigate();
 
-  // Inclui confirmarSenha para validar
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -29,7 +28,6 @@ const RegisterCliente = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validação da senha antes do envio
     const senhaErrors = validarSenha(formData.senha, formData.confirmarSenha);
     if (Object.keys(senhaErrors).length > 0) {
       setErrors(senhaErrors);
@@ -41,7 +39,6 @@ const RegisterCliente = () => {
       const response = await fetch(`${API_URL}/clientes/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // NÃO enviamos confirmarSenha para o backend
         body: JSON.stringify({
           nome: formData.nome,
           email: formData.email,
