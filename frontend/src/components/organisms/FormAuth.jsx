@@ -19,6 +19,7 @@ const FormAuth = ({ type, formData, onChange, onSubmit, errors }) => {
             <FormField id="nome" label="Nome" value={formData.nome} onChange={onChange} error={errors.nome} />
             <FormField id="email" label="Email" type="email" value={formData.email} onChange={onChange} error={errors.email} />
             <FormField id="senha" label="Senha" type="password" value={formData.senha} onChange={onChange} error={errors.senha} />
+            <FormField id="confirmarSenha" label="Confirmar Senha" type="password" value={formData.confirmarSenha || ''} onChange={onChange} error={errors.confirmarSenha} />
             <FormField id="endereco" label="Endereco" type="endereco" value={formData.endereco} onChange={onChange} error={errors.endereco} />
             <FormField id="telefone" label="Telefone" type="telefone" value={formData.telefone} onChange={onChange} error={errors.telefone} />
             <FormField id="cpf" label="CPF" type="Cpf" value={formData.cpf} onChange={onChange} error={errors.cpf} />

@@ -1,14 +1,25 @@
+
 import React, { useState } from 'react';
 import AuthTemplate from '../components/templates/AuthTemplate';
 import FormAuth from '../components/organisms/FormAuth';
 import { useNavigate } from 'react-router-dom';
+import { validarSenha } from '../services/validarSenha';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const RegisterCliente = () => {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({ nome:'', email: '', senha: '', endereco:'', telefone:'', cpf:''});
+  // Inclui confirmarSenha para validar
+  const [formData, setFormData] = useState({
+    nome: '',
+    email: '',
+    senha: '',
+    confirmarSenha: '',
+    endereco: '',
+    telefone: '',
+    cpf: ''
+  });
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
@@ -18,12 +29,27 @@ const RegisterCliente = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validação da senha antes do envio
+    const senhaErrors = validarSenha(formData.senha, formData.confirmarSenha);
+    if (Object.keys(senhaErrors).length > 0) {
+      setErrors(senhaErrors);
+      return;
+    }
+
     try {
       console.log('Enviando formData:', formData);
       const response = await fetch(`${API_URL}/clientes/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        // NÃO enviamos confirmarSenha para o backend
+        body: JSON.stringify({
+          nome: formData.nome,
+          email: formData.email,
+          senha: formData.senha,
+          endereco: formData.endereco,
+          telefone: formData.telefone,
+          cpf: formData.cpf
+        }),
       });
 
       if (!response.ok) {
@@ -55,3 +81,4 @@ const RegisterCliente = () => {
 };
 
 export default RegisterCliente;
+
