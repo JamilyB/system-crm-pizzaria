@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-
-const itensTroca = [
-  { id: 1, nome: 'Pizza Média', pontos: 300 },
-  { id: 2, nome: 'Refrigerante 2L', pontos: 150 },
-  { id: 3, nome: 'Calzone', pontos: 250 },
-  { id: 4, nome: 'Sobremesa', pontos: 200 },
-];
+import itensTroca from '../../data/itensTroca.json';
 
 const Fidelidade = () => {
-  const [pontosCliente, setPontosCliente] = useState(280); // pontos fixos no componente
+  const [pontosCliente, setPontosCliente] = useState(280);
 
   return (
     <div className="container my-5" style={{ maxWidth: '600px' }}>

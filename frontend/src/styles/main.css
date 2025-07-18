@@ -1,0 +1,57 @@
+.navigation-crm {
+  background-color: #260101;
+  min-height: 100vh;
+  color: white;
+  width: 220px;
+  padding-top: 1rem;
+}
+
+.navigation-link {
+  color: white;
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+}
+
+.navigation-link.active {
+  background-color: #f8f9fa;
+  color: #212529;
+  font-weight: bold;
+}
+
+.navigation-user {
+    background: #260101;
+    borderRadius: 0 0 18px 18px;
+    boxShadow: 0 2px 8px #0002;
+    height: 38px;
+    minHeight: 38px;
+    paddingTop: 0.2rem;
+    paddingBottom: 0.2rem;
+}
+
+.navigation-user a {
+  color: white;
+  border-radius: 8px;
+  transition: all 0.2s;
+  padding: 0.25rem 0.75rem;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.navigation-user a.active,
+.navigation-user a:hover {
+  color: #260101;
+  background: #ffe0b2;
+  font-weight: bold;
+}
+
+.avaliacao-card{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffe5a0;
+    color: #260101;
+    fontWeight: bold;
+    fontSize: 1.1rem;
+}
+

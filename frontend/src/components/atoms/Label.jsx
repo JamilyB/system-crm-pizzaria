@@ -10,7 +10,7 @@ const Label = ({ htmlFor, children, isActive }) => {
         fontWeight: '600',
         left: '0.75rem',
         fontSize: isActive ? '0.75rem' : '1rem',
-        top: isActive ? '-0.65rem' : '0.6rem', // centraliza quando não está ativo
+        top: isActive ? '-0.65rem' : '0.6rem',
         pointerEvents: 'none',
       }}
     >

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import AuthTemplate from '../components/templates/AuthTemplate';
-import FormAuth from '../components/organisms/FormAuth';
+import AuthTemplate from '../../components/templates/AuthTemplate';
+import FormAuth from '../../components/organisms/FormAuth';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
-const LoginCliente = ({ onLogin }) => {
+const LoginMotoboy = () => {
   const [formData, setFormData] = useState({ email: '', senha: '' });
   const [errors, setErrors] = useState({});
 
@@ -16,7 +16,7 @@ const LoginCliente = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_URL}/clientes/login`, {
+      const response = await fetch(`${API_URL}/motoboys/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -31,11 +31,8 @@ const LoginCliente = ({ onLogin }) => {
         setErrors({});
 
         localStorage.setItem('userId', data.userId);
-        localStorage.setItem('isLoggedIn', 'true');
 
-        if (onLogin) onLogin();
-
-        window.location.href = '/historico-cliente'; // Redireciona
+        window.location.href = '/historico-motoboy';
       }
     } catch (error) {
       setErrors({ general: 'Erro de conexão com o servidor' });
@@ -45,7 +42,7 @@ const LoginCliente = ({ onLogin }) => {
   return (
     <AuthTemplate>
       <FormAuth
-        type="login-cliente"
+        type="login-motoboy"
         formData={formData}
         onChange={handleChange}
         onSubmit={handleSubmit}
@@ -55,4 +52,4 @@ const LoginCliente = ({ onLogin }) => {
   );
 };
 
-export default LoginCliente;
+export default LoginMotoboy;

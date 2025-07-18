@@ -3,23 +3,28 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 import Home from './pages/Home';
-import LoginCliente from './pages/LoginCliente';
-import LoginMotoboy from './pages/LoginMotoboy';
-import RegisterCliente from './pages/RegisterCliente';
-import RegisterMotoboy from './pages/RegisterMotoboy';
-import Sobre from './pages/Sobre';
-import Fidelidade from './pages/Fidelidade';
-import CampanhasCliente from './pages/CampanhasCliente';
-import Principal from './pages/Principal';
-import PrincipalMotoboy from './pages/PrincipalMotoboy';
-import HistoricoCliente from './pages/HistoricoCliente';
-import HistoricoMotoboy from './pages/HistoricoMotoboy';
-import HomeAdmin from './pages/HomeAdmin';
-import Avaliacoes from './pages/AvaliacoesAdmin';
-import Perfil from './pages/Sobre';
-import HistoricoAdmin from './pages/HistoricoAdmin';
-import Campanhas from './pages/CampanhasAdmin';
-import Dashboard from './pages/DashBoardAdmin';
+import LoginCliente from './pages/Cliente/LoginCliente';
+import LoginMotoboy from './pages/Motoboy/LoginMotoboy';
+import RegisterCliente from './pages/Cliente/RegisterCliente';
+import RegisterMotoboy from './pages/Motoboy/RegisterMotoboy';
+import Sobre from './pages/Admin/Sobre';
+import Fidelidade from './pages/Cliente/Fidelidade';
+import CampanhasCliente from './pages/Cliente/CampanhasCliente';
+import Principal from './pages/Cliente/Principal';
+import PrincipalMotoboy from './pages/Motoboy/PrincipalMotoboy';
+import HistoricoCliente from './pages/Cliente/HistoricoCliente';
+import HistoricoMotoboy from './pages/Motoboy/HistoricoMotoboy';
+import HomeAdmin from './pages/Admin/HomeAdmin';
+import Avaliacoes from './pages/Admin/AvaliacoesAdmin';
+import Perfil from './pages/Admin/Sobre';
+import HistoricoAdmin from './pages/Admin/HistoricoAdmin';
+import Campanhas from './pages/Admin/CampanhasAdmin';
+
+
+import ClienteRoutes from './routes/ClienteRoutes';
+import MotoboyRoutes from './routes/MotoboyRoutes';
+import AdminRoutes from './routes/AdminRoutes';
+import PublicRoutes from './routes/PublicRoutes';
 
 import NavigationCRM from './components/molecules/NavigationCRM';
 import NavigationUser from './components/molecules/NavigationUser';
@@ -53,9 +58,10 @@ function AppContent() {
     '/register-cliente',
     '/register-motoboy'
   ];
+
+
   const hideHeader = noHeaderRoutes.includes(location.pathname);
   const hideNavigationUser = noHeaderRoutes.includes(location.pathname);
-
   const userType = getUserType(location.pathname);
 
   if (isCRM) {
@@ -63,7 +69,7 @@ function AppContent() {
       <>
         {!hideHeader && <Header />}
         <div style={{ display: 'flex', minHeight: '100vh' }}>
-          <NavigationCRM />
+          <NavigationCRM /> {/* Menu lateral do Admin */}
           <main className="flex-grow-1">
             <Routes>
               <Route path="/crm" element={<HomeAdmin />} />
@@ -71,7 +77,6 @@ function AppContent() {
               <Route path="/crm/perfil" element={<Perfil />} />
               <Route path="/crm/historico" element={<HistoricoAdmin />} />
               <Route path="/crm/campanhas" element={<Campanhas />} />
-              <Route path="/crm/dashboard" element={<Dashboard />} />
             </Routes>
           </main>
         </div>
@@ -104,9 +109,7 @@ function AppContent() {
 }
 
 function App() {
-  return (
-      <AppContent />
-  );
+  return <AppContent />;
 }
 
 export default App;

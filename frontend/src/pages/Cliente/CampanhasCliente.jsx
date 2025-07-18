@@ -6,7 +6,6 @@ const CampanhasCliente = () => {
   const [campanhas, setCampanhas] = useState([]);
   const [aceitas, setAceitas] = useState({});
 
-  // Recupera aceitas do localStorage ao iniciar
   useEffect(() => {
     const aceitasSalvas = JSON.parse(localStorage.getItem('campanhasAceitas') || '{}');
     setAceitas(aceitasSalvas);

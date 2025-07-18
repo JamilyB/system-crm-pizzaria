@@ -1,6 +1,5 @@
 import React from 'react';
-import HomePage from '../components/templates/HomePage';
-import Header from '../components/molecules/Header';
+import Header from '../../components/molecules/Header';
 
 const HomeAdmin = () => {
   return (

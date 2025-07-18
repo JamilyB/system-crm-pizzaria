@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../styles/main.css';
 
 const AvaliacaoCard = ({ autor, alvo, tipo, nota, texto }) => (
   <div className="card mb-3 shadow-sm border-0" style={{ background: '#fff8f0' }}>
@@ -7,20 +8,9 @@ const AvaliacaoCard = ({ autor, alvo, tipo, nota, texto }) => (
         <span className="badge bg-primary" style={{ fontSize: '0.95rem' }}>{tipo}</span>
       </div>
       <div className="d-flex align-items-center mb-2">
-        <div
-          className="d-flex flex-column justify-content-center align-items-center me-3"
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: '50%',
-            background: '#ffe5a0',
-            color: '#260101',
-            fontWeight: 'bold',
-            fontSize: '1.1rem',
-          }}
-        >
-          <span style={{ fontSize: '0.8rem', fontWeight: 400 }}>Nota</span>
-          <span style={{ fontSize: '1.2rem' }}>{nota}</span>
+        <div className=" avaliacao-card d-flex flex-column justify-content-center align-items-center me-3">
+          <span>Nota</span>
+          <span>{nota}</span>
         </div>
         <div>
           <div style={{ fontWeight: 600, color: '#260101' }}>

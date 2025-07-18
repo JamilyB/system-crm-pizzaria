@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import useFetch from '../../../hooks/useFetch';
+import CampanhaCard from './CampanhaCard';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
@@ -99,24 +101,8 @@ const CampanhasAdmin = () => {
         </div>
       </div>
       {campanhas.map(c => (
-        <div key={c.id} className="card mb-3" style={{ border: '2px solid #260101' }}>
-          <div className="card-body">
-            <h5 className="card-title">📣 {c.nome}</h5>
-            <p className="card-text"><strong>Mídia:</strong> {c.midia}</p>
-            <p className="card-text"><strong>Benefício:</strong> {c.beneficio || '-'}</p>
-            <p className="card-text"><strong>Clientes atingidos:</strong> {c.atingidos ?? '-'}</p>
-            <p className="card-text">
-              <strong>Taxa de retorno:</strong> {c.retorno !== undefined ? `${(c.retorno * 100).toFixed(1)}%` : '-'}
-            </p>
-            <button
-              className="btn btn-danger mt-2"
-              onClick={() => handleDelete(c.id)}
-            >
-              Excluir
-            </button>
-          </div>
-        </div>
-      ))}
+            <CampanhaCard key={c.id} campanha={c} onDelete={handleDelete} />
+          ))}
     </div>
   );
 };

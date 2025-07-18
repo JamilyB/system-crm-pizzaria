@@ -13,8 +13,8 @@ const Input = ({ id, type = 'text', value, onChange, onFocus, onBlur }) => {
       style={{
         borderColor: '#260101',
         color: '#1c1c1c',
-        height: '2.5rem', // aumenta a altura
-        paddingTop: '0.8rem', // espaço para o label
+        height: '2.5rem',
+        paddingTop: '0.8rem',
         paddingBottom: '0.8rem',
         fontSize: '1rem',
       }}

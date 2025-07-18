@@ -1,16 +1,10 @@
 import React from 'react';
-import CardHistorico from '../components/molecules/CardHistorico';
+import CardHistorico from '../../components/molecules/CardHistorico';
+import dadosPedidos from '../../data/pedidos.json';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
-const dadosPedidos = [
-  { id: 101, cliente: 'João Silva', motoboy: 'Carlos', dataHora: '05/06/2025 19:30' },
-  { id: 102, cliente: 'Maria Oliveira', motoboy: 'Pedro', dataHora: '06/06/2025 20:15' },
-  { id: 103, cliente: 'Lucas Santos', motoboy: 'Ana', dataHora: '07/06/2025 18:45' },
-];
-
 const HistoricoAdmin = () => {
-  // Função para enviar avaliação ao backend
   const handleAvaliar = async (pedido, avaliacao) => {
     try {
       await fetch(`${API_URL}/api/avaliacoes`, {

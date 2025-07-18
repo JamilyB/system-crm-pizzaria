@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import cor from '../../styles/colors';
-
+import '../../styles/main.css';
 const navItems = {
   cliente: [
     { to: '/fidelidade', label: 'Fidelidade' },
@@ -19,29 +19,15 @@ const NavigationUser = ({ userType }) => {
 
   return (
     <nav
-      className="d-flex justify-content-center align-items-center gap-4 px-4"
-      style={{
-        background: '#260101',
-        borderRadius: '0 0 18px 18px',
-        boxShadow: '0 2px 8px #0002',
-        height: '38px', // altura mais fina
-        minHeight: '38px',
-        paddingTop: '0.2rem',
-        paddingBottom: '0.2rem'
-      }}
+      className="navigation-user d-flex justify-content-center align-items-center gap-4 px-4"
     >
       {items.map(item => (
         <Link
           key={item.to}
           to={item.to}
-          className="text-decoration-none px-3 py-1"
-          style={{
-            color: location.pathname === item.to ? '#260101' : '#fff',
-            background: location.pathname === item.to ? '#ffe0b2' : 'transparent',
-            borderRadius: '8px',
-            fontWeight: location.pathname === item.to ? 'bold' : 'normal',
-            transition: 'all 0.2s'
-          }}
+          className={({ isActive }) =>
+            isActive ? 'active' : ''
+          }
         >
           {item.label}
         </Link>
