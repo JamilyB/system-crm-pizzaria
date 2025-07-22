@@ -10,11 +10,8 @@ import RegisterMotoboy from './pages/Motoboy/RegisterMotoboy';
 import Sobre from './pages/Admin/Sobre';
 import Fidelidade from './pages/Cliente/Fidelidade';
 import CampanhasCliente from './pages/Cliente/CampanhasCliente';
-import Principal from './pages/Cliente/Principal';
-import PrincipalMotoboy from './pages/Motoboy/PrincipalMotoboy';
 import HistoricoCliente from './pages/Cliente/HistoricoCliente';
 import HistoricoMotoboy from './pages/Motoboy/HistoricoMotoboy';
-import HomeAdmin from './pages/Admin/HomeAdmin';
 import Avaliacoes from './pages/Admin/AvaliacoesAdmin';
 import Perfil from './pages/Admin/Sobre';
 import HistoricoAdmin from './pages/Admin/HistoricoAdmin';
@@ -32,13 +29,11 @@ import Header from './components/molecules/Header';
 
 function getUserType(pathname) {
   if (
-    pathname.startsWith('/principal-motoboy') ||
     pathname.startsWith('/historico-motoboy')
   ) {
     return 'motoboy';
   }
   if (
-    pathname.startsWith('/principal') ||
     pathname.startsWith('/fidelidade') ||
     pathname.startsWith('/historico-cliente') ||
     pathname.startsWith('/campanhas-cliente')
@@ -69,10 +64,9 @@ function AppContent() {
       <>
         {!hideHeader && <Header />}
         <div style={{ display: 'flex', minHeight: '100vh' }}>
-          <NavigationCRM /> {/* Menu lateral do Admin */}
+          <NavigationCRM />
           <main className="flex-grow-1">
             <Routes>
-              <Route path="/crm" element={<HomeAdmin />} />
               <Route path="/crm/avaliacoes" element={<Avaliacoes />} />
               <Route path="/crm/perfil" element={<Perfil />} />
               <Route path="/crm/historico" element={<HistoricoAdmin />} />
@@ -97,8 +91,6 @@ function AppContent() {
           <Route path="/register-motoboy" element={<RegisterMotoboy />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/fidelidade" element={<Fidelidade />} />
-          <Route path="/principal" element={<Principal />} />
-          <Route path="/principal-motoboy" element={<PrincipalMotoboy />} />
           <Route path="/historico-cliente" element={<HistoricoCliente />} />
           <Route path="/historico-motoboy" element={<HistoricoMotoboy />} />
           <Route path="/campanhas-cliente" element={<CampanhasCliente />} />

@@ -1,9 +1,9 @@
-import React from 'react';
-import CardHistorico from '../../components/molecules/CardHistorico';
-import dadosPedidos from '../../data/pedidos.json';
-import usePost from '../../hooks/usePost';
+import React, { useState } from 'react';
+import CardHistorico from '../../../components/molecules/CardHistorico';
+import dadosPedidos from '../../../data/pedidos.json';
+import usePost from '../../../hooks/usePost';
 
-const HistoricoAdmin = () => {
+const HistoricoMotoboy = () => {
 
   const { post } = usePost('/api/avaliacoes');
 
@@ -18,7 +18,7 @@ const HistoricoAdmin = () => {
         <CardHistorico
           key={pedido.id}
           pedido={pedido}
-          avaliador="pizzaria"
+          avaliador="motoboy"
           onAvaliar={handleAvaliar}
         />
       ))}
@@ -26,4 +26,4 @@ const HistoricoAdmin = () => {
   );
 };
 
-export default HistoricoAdmin;
+export default HistoricoMotoboy;

@@ -1,9 +1,9 @@
 
 import React, { useState } from 'react';
-import AuthTemplate from '../../components/templates/AuthTemplate';
-import FormAuth from '../../components/organisms/FormAuth';
+import AuthTemplate from '../../../components/templates/AuthTemplate';
+import FormAuth from '../../../components/organisms/FormAuth';
 import { useNavigate } from 'react-router-dom';
-import { validarSenha } from '../../services/validarSenha';
+import { validarSenha } from '../../../services/validarSenha';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 

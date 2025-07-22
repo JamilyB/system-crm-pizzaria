@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import useFetch from '../../../hooks/useFetch';
 import CampanhaCard from './CampanhaCard';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+import CampanhaForm from './CampanhaForm';
+import usePost from '../../../hooks/usePost';
+import useDelete from '../../../hooks/useDelete';
 
 const CampanhasAdmin = () => {
   const [campanhas, setCampanhas] = useState([]);
   const [novaCampanha, setNovaCampanha] = useState({ nome: '', midia: '', beneficio: '' });
 
+  const { data, loading } = useFetch('/api/campanhas');
+  const { post } = usePost('/api/campanhas');
+  const { remove } = useDelete('/api/campanhas');
+
   useEffect(() => {
-    fetch(`${API_URL}/api/campanhas`)
-      .then(res => res.json())
-      .then(data => setCampanhas(
-        data.map(c => ({
-          id: c.id,
-          nome: c.descricao ?? '',
-          midia: c.midiaUsada ?? '',
-          beneficio: c.beneficio ?? '',
-          atingidos: c.clientesAtingidos?.length ?? 0,
-          retorno: c.taxaRetorno ?? 0
-        }))
-      ));
-  }, []);
+      if (data) {
+        setCampanhas(
+          data.map(c => ({
+            id: c.id,
+            nome: c.descricao ?? '',
+            midia: c.midiaUsada ?? '',
+            beneficio: c.beneficio ?? '',
+            atingidos: c.clientesAtingidos?.length ?? 0,
+            retorno: c.taxaRetorno ?? 0
+          }))
+        );
+      }
+    }, [data]);
 
   const handleAdd = async () => {
     if (!novaCampanha.nome || !novaCampanha.midia) return;
@@ -30,13 +35,8 @@ const CampanhasAdmin = () => {
       midiaUsada: novaCampanha.midia,
       beneficio: novaCampanha.beneficio
     };
-    const resp = await fetch(`${API_URL}/api/campanhas`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (resp.ok) {
-      const salva = await resp.json();
+    const salva = await post(body);
+    if (salva) {
       setCampanhas([
         ...campanhas,
         {
@@ -53,53 +53,20 @@ const CampanhasAdmin = () => {
   };
 
   const handleDelete = async (id) => {
-    const resp = await fetch(`${API_URL}/api/campanhas/${id}`, {
-      method: 'DELETE'
-    });
-    if (resp.ok) {
-      setCampanhas(campanhas.filter(c => c.id !== id));
-    }
-  };
+      const ok = await remove(id);
+      if (ok) {
+        setCampanhas(campanhas.filter(c => c.id !== id));
+      }
+    };
 
   return (
     <div className="container">
       <h2 className="mb-4 mt-4" style={{ color: '#260101' }}>Campanhas de Marketing</h2>
-      <div className="card mb-4 p-3">
-        <h5>Nova Campanha</h5>
-        <div className="row">
-          <input
-            className="form-control mb-2"
-            placeholder="Nome da campanha"
-            value={novaCampanha.nome}
-            onChange={e => setNovaCampanha({ ...novaCampanha, nome: e.target.value })}
-          />
-          <select
-            className="form-control mb-2"
-            value={novaCampanha.midia}
-            onChange={e => setNovaCampanha({ ...novaCampanha, midia: e.target.value })}
-          >
-            <option value="">Mídia</option>
-            <option value="WhatsApp">WhatsApp</option>
-            <option value="Instagram">Instagram</option>
-            <option value="Facebook">Facebook</option>
-            <option value="SMS">SMS</option>
-            <option value="E-mail">E-mail</option>
-          </select>
-          <input
-            className="form-control mb-2"
-            placeholder="Benefício"
-            value={novaCampanha.beneficio}
-            onChange={e => setNovaCampanha({ ...novaCampanha, beneficio: e.target.value })}
-          />
-          <button
-            className="btn"
-            style={{ backgroundColor: '#260101', color: 'white' }}
-            onClick={handleAdd}
-          >
-            Adicionar
-          </button>
-        </div>
-      </div>
+      <CampanhaForm
+        novaCampanha={novaCampanha}
+        setNovaCampanha={setNovaCampanha}
+        handleAdd={handleAdd}
+      />
       {campanhas.map(c => (
             <CampanhaCard key={c.id} campanha={c} onDelete={handleDelete} />
           ))}

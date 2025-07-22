@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import itensTroca from '../../data/itensTroca.json';
+import itensTroca from '../../../data/itensTroca.json';
 
 const Fidelidade = () => {
   const [pontosCliente, setPontosCliente] = useState(280);

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
+import CampanhaCard from './CampanhaCard';
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const CampanhasCliente = () => {
+
   const [campanhas, setCampanhas] = useState([]);
   const [aceitas, setAceitas] = useState({});
 
@@ -58,43 +59,12 @@ const CampanhasCliente = () => {
       )}
       <div className="row">
         {campanhas.map(c => (
-          <div key={c.id} className="col-12 col-md-6">
-            <div
-              className="card shadow"
-              style={{
-                border: '2px solid #260101',
-                background: 'linear-gradient(135deg, #fff7e6 60%, #ffe0b2 100%)',
-                borderRadius: '18px'
-              }}
-            >
-              <div className="card-body">
-                <h5 className="card-title" style={{ color: '#b30000', fontWeight: 'bold' }}>
-                  <span role="img" aria-label="megafone">📣</span> {c.descricao}
-                </h5>
-                <div
-                  className="mb-3 p-2"
-                  style={{
-                    background: '#fff3cd',
-                    borderRadius: '8px',
-                    color: '#856404',
-                    fontWeight: 'bold',
-                    fontSize: '1.1em',
-                    boxShadow: '0 1px 4px #ffe082'
-                  }}
-                >
-                  <span role="img" aria-label="presente">🎁</span> Benefício: {c.beneficio}
-                </div>
-                <button
-                  className="btn btn-success"
-                  disabled={!!aceitas[c.id]}
-                  style={aceitas[c.id] ? { backgroundColor: '#28a745', opacity: 0.7 } : {}}
-                  onClick={() => handleCativar(c.id)}
-                >
-                  {aceitas[c.id] ? 'Aceito' : 'Aceitar'}
-                </button>
-              </div>
-            </div>
-          </div>
+          <CampanhaCard
+              key={c.id}
+              campanha={c}
+              aceita={aceitas[c.id]}
+              onCativar={handleCativar}
+            />
         ))}
       </div>
     </div>
